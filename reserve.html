@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Hot_Restaurant</title>
   <!-- Latest compiled and minified CSS & JS -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <script src="https://code.jquery.com/jquery.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
@@ -16,8 +16,8 @@
       <h1>Hot Restaurant</h1>
       <h3>So hot that you'll assume you're on fire</h3>
       <hr>
-      <a href="/home.html"><button type="button" class="btn btn-danger btn-lg"><span class="glyphicon glyphicon-eye-open"></span> Home </button></a>
-      <a href="/tables.html"><button type="button" class="btn btn-danger btn-lg"><span class="glyphicon glyphicon-th-list"></span> Check tables </button></a>
+      <a href="/home"><button type="button" class="btn btn-danger btn-lg"><span class="glyphicon glyphicon-eye-open"></span> Home </button></a>
+      <a href="/tables"><button type="button" class="btn btn-danger btn-lg"><span class="glyphicon glyphicon-th-list"></span> Check tables </button></a>
     </div>
     <div class="row">
 
@@ -61,6 +61,12 @@
       </div>
     </div>
   </div>
+  <footer class="footer">
+    <div class="container">
+        <p>Control Panel</p>
+      <p><a href="#" id="clear">Clear Table</a> | <a href="/api/tables">API Table Link</a> | <a href="/api/reserve">API Wait List</a></p>
+    </div>
+  </footer>
 
   <script type="text/javascript">
     // Question: What does this code do?
@@ -76,13 +82,22 @@
 
       // Question: What does this code do??
 
-      $.post("/api/reserve", newRes)
+      $.post("/api/tables", newRes)
         .then(function(data) {
           console.log(data);
-          alert("Adding character...");
+          alert("Adding tables");
+        
+
+        $('#name').val('');
+        $('#number').val('');
+        $('#email').val('');
+        $('#ssn').val('');
+
         });
 
+
     });
+
   </script>
 </body>
 </html>
