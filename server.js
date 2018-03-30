@@ -23,6 +23,7 @@ app.get("/reserve", function(req,res){
 });
 
 //Fill with dummy data later 
+var waitList = [];
 var tables = [
     {
         name: "Devin",
@@ -47,34 +48,40 @@ var tables = [
         number: "910-550-7665",
         email: "devindinapoli@gmail.com",
         id: "The Dude"
-    },
-    {
-        name: "Devin",
-        number: "910-550-7665",
-        email: "devindinapoli@gmail.com",
-        id: "The Dude"
-    },
+    }
+    
 ];
 
 app.get("/api/tables", function(req,res){
     res.json(tables);
 });
 
+app.get("/api/waitlist", function(req,res){
+    res.json(waitList)
+})
+
+
 app.post("/api/tables", function(req,res){
     var newRes = req.body;
-
-    tables.push(newRes);
-
     var isFull;
 
-    if(tables.length === 6) {
-        isFull = true
+    if(tables.length < 5) {
+       tables.push(newRes);
+       isFull = true;
+       res.json(tables);
     }
     else{
         isFull = false;
-    }
-    res.json(tables);
+        waitList.push(newRes);
+        res.json(waitList);
+
+    }  
 });
+
+
+app.post("/api/waitlist",function(req,res){
+
+})
 
 app.post('/api/clear', function (req, res) {
     tables = [];
