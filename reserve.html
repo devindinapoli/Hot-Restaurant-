@@ -28,7 +28,7 @@
             <h3 class="panel-title"><strong>Add Reservation</strong></h3>
           </div>
           <div class="panel-body">
-            <form role="form">
+            <form role="form" method="POST">
 
               <div class="form-group">
                 <label for="name">Name</label>
@@ -64,7 +64,7 @@
   <footer class="footer">
     <div class="container">
         <p>Control Panel</p>
-      <p><a href="#" id="clear">Clear Table</a> | <a href="/api/tables">API Table Link</a> | <a href="/api/reserve">API Wait List</a></p>
+      <p><a href="#" id="clear">Clear Table</a> | <a href="/api/tables">API Table Link</a> | <a href="/api/waitlist">API Wait List</a></p>
     </div>
   </footer>
 
@@ -73,7 +73,7 @@
     $("#add-btn").on("click", function(event) {
       event.preventDefault();
 
-      var newRes = {
+      var newReservation = {
         name: $("#name").val().trim(),
         number: $("#number").val().trim(),
         email: $("#email").val().trim(),
@@ -82,7 +82,7 @@
 
       // Question: What does this code do??
 
-      $.post("/api/tables", newRes)
+      $.post("/api/tables", newReservation)
         .then(function(data) {
           console.log(data);
           alert("Adding tables");
