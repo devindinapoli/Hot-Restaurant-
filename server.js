@@ -60,21 +60,28 @@ app.get("/api/tables", function(req,res){
     res.json(tables);
 });
 
-app.post("/api/reserve", function(req,res){
+app.post("/api/tables", function(req,res){
     var newRes = req.body;
 
     tables.push(newRes);
 
     var isFull;
 
-    if(tables.length === 5) {
+    if(tables.length === 6) {
         isFull = true
     }
     else{
         isFull = false;
     }
-    res.json(isFull);
+    res.json(tables);
 });
+
+app.post('/api/clear', function (req, res) {
+    tables = [];
+    res.sendFile(path.join(__dirname, 'tables.html'));
+  });
+
+
 
 app.listen(PORT, function(){
     console.log("Listening on PORT " + PORT);
