@@ -17,13 +17,19 @@
       <h3>So hot that you'll assume you're on fire</h3>
       <hr>
       <a href="/"><button type="button" class="btn btn-danger btn-lg"><span class="glyphicon glyphicon-eye-open"></span> Home </button></a>
+
+      <a href="/tables"><button type="button" class="btn btn-danger btn-lg"><span class="glyphicon glyphicon-th-list"></span> Check tables </button></a>
+
       <a href="/reserve"><button type="button" class="btn btn-danger btn-lg"><span class="glyphicon glyphicon-th-list"></span> Reserve Table</button></a>
+
     </div>
     <div class="row">
         <div class="col-12">
             <div class="card">
                 <h5 class="card-header">Reserve Tables</h5>
-                <div class="card-body" id="reserveList">
+
+                <div class="card-body" id="reserve-list">
+
 
                 </div>
             </div>
@@ -47,5 +53,37 @@
             <p><a href="/api/tables">API Table Link |</a><a href="/api/waitlist">API Waitlist</a></p>
         </div>
     </footer>
+
+
+    <script type= "text/javascript">
+        var hotRestaurant = function(list) {
+            $.get("/api/"+list , function(data) {
+                if(list === "tables") {
+                    for(var i=0; i < data.length; i++) {
+                        var card =
+                        "<div class='card'>"+
+                        "<h5 class='card-header'>"+ data[i].name + "</h5>"+
+                        "<div class='card-body'>"+ data[i].id+ "</div>"+
+                        "</div><br>";
+                         
+                        $("#reserve-list").append(card);
+                    }
+                } else {
+                    for(var i=0; i < data.length; i++) {
+                        var card = 
+                        "<div class='card'>"+
+                        "<h5 class='card-header'>"+ data[i].name + "</h5>"+
+                        "<div class='card-body'>"+ data[i].id+ "</div>"+
+                        "</div><br>\n";
+                         
+                        $("#waiting-list").append(card);
+                    }
+
+                }
+            }) 
+        }
+        hotRestaurant("tables");
+        hotRestaurant("waitlist");
+    </script>
 </body>
 </html>
