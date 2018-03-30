@@ -69,7 +69,7 @@
   </footer>
 
   <script type="text/javascript">
-    // Question: What does this code do?
+
     $("#add-btn").on("click", function(event) {
       event.preventDefault();
 
@@ -77,10 +77,8 @@
         name: $("#name").val().trim(),
         number: $("#number").val().trim(),
         email: $("#email").val().trim(),
-        ssn: $("#ssn").val().trim()
+        id: $("#ssn").val().trim()
       };
-
-      // Question: What does this code do??
 
       $.post("/api/tables", newReservation)
         .then(function(data) {
